@@ -1,0 +1,15 @@
+image: 462431298328.dkr.ecr.sa-east-1.amazonaws.com/devops/docker/images/yarn:1.0.0
+
+stages:
+  - build
+
+vericacao:
+    stage: build
+    script:
+    - cat /etc/os-release
+    - apt update -y
+    - apt install software-properties-common -y
+    - add-apt-repository ppa:deadsnakes/ppa -y
+    - apt  install python3.9 -y
+    - python3.9 --version
+

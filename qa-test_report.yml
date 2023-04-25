@@ -1,0 +1,21 @@
+qa-test:
+    image: 462431298328.dkr.ecr.sa-east-1.amazonaws.com/devops/docker/images/yarn:1.0.0
+    stage: qa-test
+    before_script:
+    - cat /etc/os-release
+    - apt update -y
+    - apt install python3-pip -y && apt install git -y
+    - pip --version
+    
+    script:
+    - cd teste_consumer_app_android
+    - pip install -r requirements.txt
+    - chmod +x ./run.sh
+    - ./run.sh android bs ci_true
+    only:
+    - feature/qa-test-2
+    artifacts:
+      when: always
+      paths:
+      - teste_consumer_app_android/logs/
+      expire_in: 1 day
